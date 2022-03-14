@@ -15,10 +15,10 @@ def main(in_folder = "in", out_folder = "out"):
     for file in files:
         if file[0] == "." : files.remove(file)
 
+    if files == []:
+        print("No files in directory (might be the first launch)")
+        exit()    
     if len(files) > 1:
-        if files == []:
-            print("No files in directory (might be the first launch)")
-            exit()
         for i in range(len(files)):
             print(f"{i}) {files[i]}")
         file_number = int(input("Entrez le numéro correspondant au fichier a modifier : "))
