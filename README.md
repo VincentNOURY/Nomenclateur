@@ -17,17 +17,17 @@ Lancez le en double cliquant dessus
 Lancer un terminal (ou powershell sur windows) et tapez la commande correspondant au script choisit
 
 #### Python
-```python
+```bash
 python3 nomenclateur.py
 ```
 ou
-```python
+```bash
 ./nomenclateur.py
 ```
 
 #### Bash
 
-```bash
+```powershell
 ./nomenclateur.sh
 ```
 
