@@ -27,7 +27,7 @@ ou
 
 #### Bash
 
-```powershell
+```bash
 ./nomenclateur.sh
 ```
 
