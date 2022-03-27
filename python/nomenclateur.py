@@ -17,13 +17,15 @@ def main(in_folder = "in", out_folder = "out"):
 
     if files == []:
         print("No files in directory (might be the first launch)")
-        exit()    
+        exit()
     if len(files) > 1:
         for i in range(len(files)):
             print(f"{i}) {files[i]}")
         file_number = int(input("Entrez le numéro correspondant au fichier a modifier : "))
     else:
         file_number = 0
+
+    print(f"Fichier a renommer : {files[file_number]}")
 
     ext = files[file_number].split(".")[-1]
     eprof = input("Entrez votre nom : ")
