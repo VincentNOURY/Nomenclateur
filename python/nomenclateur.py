@@ -3,6 +3,7 @@ from os.path import exists
 from os import mkdir
 from os import listdir
 from datetime import date
+import hashlib
 
 
 #NOMENCLATURE : Révision/Cours/Correction
@@ -34,14 +35,19 @@ def main(in_folder = "in", out_folder = "out"):
     matiere = input("Entrez la matiere : ")
     niveau = input("Entrez le niveau du cours (LX/MX) : ")
     type_exam = input("Entrez le type d'exam à passer (DE/CE/CC/TP/RAT) : ")
-    date_input = input("Entrez la date (format : DD-MM-AAAA \n \
+    date_input = input("Entrez la date (format : DD-MM-AAAA \n\
 laisser vide pour aujourd'hui) : ")
 
     if date_input == "":
         date_input = date.today().strftime("%d-%m-%Y")
 
+    md5 = ""
+
+    with open(in_folder + "/" + files[file_number], "rb") as file:
+        md5 = hashlib.md5(file.read()).hexdigest()
+
     rename(f"{in_folder}/{files[file_number]}", f"{out_folder}/{type_cours}\
- ({type_exo}) - {matiere} {niveau} ({type_exam}) {date_input} [{eprof}].{ext}")
+ ({type_exo}) - {matiere} {niveau} ({type_exam}) {date_input} [{eprof}] - {md5}.{ext}")
 
     print("Fichier renommé")
 

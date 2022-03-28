@@ -60,7 +60,7 @@ read niveau;
 echo "Entrez le type d'exam à passer (DE/CE/CC/TP/RAT) : ";
 read type_exam;
 
-echo "Entrez la date (format : DD-MM-AAAA \n laisser vide pour aujourd'hui) : ";
+echo -e "Entrez la date (format : DD-MM-AAAA \nlaisser vide pour aujourd'hui) : ";
 read date_input;
 # Asks for the necessary informations
 
@@ -71,8 +71,16 @@ then
 fi
 # Setting the date input if empty
 
+if [[ "$OSTYPE" == "darwin"* ]] # MacOS
+then
+  md5=$(md5 $in_folder${array_of_files[$file_number]} | rev | cut -d ' ' -f 1 | rev);
+else # Linux
+  md5=$(md5sum $in_folder${array_of_files[$file_number]} | cut -d ' ' -f 1);
+fi
+
+
 ext=$(echo ${array_of_files[$file_number]} | rev | cut -d '.' -f 1 | rev);
-file_name="$out_folder/$type_cours ($type_exo) - $matiere $niveau ($type_exam) $date_input [$eprof].$ext";
+file_name="$out_folder/$type_cours ($type_exo) - $matiere $niveau ($type_exam) $date_input [$eprof] - $md5.$ext";
 
 
 mv "$in_folder/${array_of_files[$file_number]}" "$file_name";
