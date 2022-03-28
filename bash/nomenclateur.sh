@@ -70,10 +70,15 @@ echo -e "Entrez la date (format : DD-MM-AAAA \nlaisser vide pour aujourd'hui) : 
 read date_input;
 # Asks for the necessary informations
 
+while [[ ! -z $(echo $date_input | grep -vw "[0-3][0-9]-[01][0-9]-[0-2][0-9][0-9][0-9]") ]]
+do
+  echo "Merci de respecter le format DD-MM-AAAA ou de laisser vide";
+  read date_input;
+done
 
 if [ -z "$date_input" ]
 then
-  date_input=$(date +"%F")
+  date_input=$(date +"%d-%m-%Y")
 fi
 # Setting the date input if empty
 
