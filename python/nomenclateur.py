@@ -4,6 +4,7 @@ from os import mkdir
 from os import listdir
 from datetime import date
 import hashlib
+import re
 
 
 #NOMENCLATURE : Révision/Cours/Correction
@@ -38,6 +39,15 @@ def main(in_folder = "in", out_folder = "out"):
     date_input = input("Entrez la date (format : DD-MM-AAAA \n\
 laisser vide pour aujourd'hui) : ")
 
+    temp_bool = True
+
+    while temp_bool:
+        if date_input == "" or re.match("[0-3][0-9]-[01][0-9]-[0-2][0-9][0-9][0-9]", date_input):
+            temp_bool = False
+        else:
+            date_input = input("Veuillez entrer une date conforme au format DD-MM-AAAA ou laisser vide :")
+
+
     if date_input == "":
         date_input = date.today().strftime("%d-%m-%Y")
 
@@ -55,7 +65,7 @@ laisser vide pour aujourd'hui) : ")
 def sanitize_int(message, max):
     set = False
     var = -1
-    while (not set) or (var < 0 or var > max):
+    while (not set) or (var < 0 or var >= max):
         try:
             var = int(input(message))
             set = True
