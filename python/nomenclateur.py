@@ -17,12 +17,12 @@ def main(in_folder = "in", out_folder = "out"):
         if file[0] == "." : files.remove(file)
 
     if files == []:
-        print("No files in directory (might be the first launch)")
+        print("Aucun fichiers trouvés (peut etre le cas au premier lancement).")
         exit()
     if len(files) > 1:
         for i in range(len(files)):
             print(f"{i}) {files[i]}")
-        file_number = int(input("Entrez le numéro correspondant au fichier a modifier : "))
+        file_number = sanitize_int("Entrez le numéro correspondant au fichier a modifier : ", len(files))
     else:
         file_number = 0
 
@@ -51,6 +51,20 @@ laisser vide pour aujourd'hui) : ")
 
     print("Fichier renommé")
 
+
+def sanitize_int(message, max):
+    set = False
+    var = -1
+    while (not set) or (var < 0 or var > max):
+        try:
+            var = int(input(message))
+            set = True
+        except KeyboardInterrupt:
+            print('\nOpération annulée.')
+            exit()
+        except:
+            print(f"Veuillez entrer un nombre entre 0 et {max - 1}")
+    return var
 
 if __name__ == '__main__':
     in_folder = "in"

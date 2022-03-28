@@ -25,22 +25,28 @@ then
   exit;
 fi
 # Checking if the number of files is correct
-
+echo "number of files $number_of_files";
 if [[ (($number_of_files > 1)) ]]
 then
-  for i in $number_of_files
+  for i in $(seq 0 $(($number_of_files - 1)));
   do
     echo "$i) ${array_of_files[$i]}";
   done
 
   echo "Entrez le numéro du fichier a renommer";
   read file_number;
+  while [[ ( -z "$(echo $file_number | grep "^[ [:digit:] ]*$")") || $file_number > $(($number_of_files - 1)) || $file_number < 0 ]]
+  do
+    echo "Veuillez entrer un nombre";
+    read file_number;
+  done
   # File selection
 
 else
   file_number=0;
 fi
 
+echo "Fichier sélectionné : ${array_of_files[$file_number]}";
 
 echo "Entrez votre nom : ";
 read eprof;
