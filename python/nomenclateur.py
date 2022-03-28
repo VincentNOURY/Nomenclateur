@@ -3,6 +3,7 @@ from os.path import exists
 from os import mkdir
 from os import listdir
 from datetime import date
+from os.path import join
 import hashlib
 import re
 
@@ -56,8 +57,8 @@ laisser vide pour aujourd'hui) : ")
     with open(in_folder + "/" + files[file_number], "rb") as file:
         md5 = hashlib.md5(file.read()).hexdigest()
 
-    rename(f"{in_folder}/{files[file_number]}", f"{out_folder}/{type_cours}\
- ({type_exo}) - {matiere} {niveau} ({type_exam}) {date_input} [{eprof}] - {md5}.{ext}")
+    rename(join(in_folder, files[file_number]), join(out_folder, f"{type_cours}\
+ ({type_exo}) - {matiere} {niveau} ({type_exam}) {date_input} [{eprof}] - {md5}.{ext}"))
 
     print("Fichier renommé")
 
